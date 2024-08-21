@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel='icon' href='favicon.ico' type='image/x-icon' sizes="16x16" />
+    <title>Pokémon Türkçe Yama</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Center game buttons */
+        .game-selection {
+            display: flex;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .game-selection .btn {
+            margin: 10px;
+            width: 150px;
+        }
+
+        /* Style the options and sub-options menu */
+        .options-container,
+        .sub-options-container {
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 20px;
+            border: none;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Style for option buttons */
+        .btn-option {
+            width: 100%;
+            margin-bottom: 10px;
+            display: block;
+            text-align: left;
+            padding: 10px;
+            border: 1px solid #dee2e6;
+            border-radius: 5px;
+            background-color: #f8f9fa;
+        }
+
+        /* Style for selected option */
+        .btn-option.active {
+            background-color: #007bff;
+            color: white;
+            border-color: #007bff;
+        }
+
+        /* Responsive image sizes */
+        .img-fluid {
+            max-width: 100%;
+            height: auto;
+        }
+
+        body {
+            padding-bottom: 100px;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="logo.png" alt="Logo" width="30" height="30" class="d-inline-block align-text-top">
+                Pokémon Türkçe Yama İndiricisi
+            </a>
+            <button class="btn btn-outline-primary ms-auto" data-bs-toggle="modal" data-bs-target="#aboutModal">Hakkımızda</button>
+        </div>
+    </nav>
+
+    <!-- About Modal -->
+    <div class="modal fade" id="aboutModal" tabindex="-1" aria-labelledby="aboutModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="aboutModalLabel">Hakkımızda</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Bu site, eski Pokémon oyunlarını Türkçe dilinde oynamak isteyenleri desteklemek için kurulmuştur.<br><br>Çevirilerden hiçbir şekilde para kazanılmamaktadır ve indirmeler tamamen ücretsiz bir şekilde sunulmaktadır.<br><br>Pokémon Şirketi ile hiçbir bağlantısı yoktur. Bu site, hiçbir şekilde korsan oyun indirmeyi desteklemez ve indirdiğiniz oyunları önceden satın alarak Pokémon Şirketi'ni desteklediğinizi varsayar.</p>
+                </div>
+                <div class="modal-footer">
+                    <a id="discordLink" href="https://discord.gg/aHJMKXkafz" class="btn btn-primary" style="border-radius: 5px; color: #fff; background-color: #7289da; border: 1px solid #7289da;">Discord'a Katıl</a>
+
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Kapat</button>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Invitation Modal -->
+    <div class="modal fade" id="invitationModal" tabindex="-1" aria-labelledby="invitationModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="invitationModalLabel">Bize Katıl!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Güncellemelerden haberdar olmak ve soru sormak için Discord kanalımıza katılabilirsiniz!</p>
+                </div>
+                <div class="modal-footer">
+                    <a id="discordLink" href="https://discord.gg/aHJMKXkafz" class="btn btn-primary" style="border-radius: 5px; color: #fff; background-color: #7289da; border: 1px solid #7289da;">Discord'a Katıl</a>
+                    <button id="downloadBtn" type="button" class="btn btn-success" style="border-radius: 5px; color: #fff; background-color: #43b581; border: 1px solid #43b581;" onclick="startDownload()">Oyunu İndir</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Game Selection -->
+    <div class="container">
+        <h2 class="text-center mt-3">Oyun Seçin</h2>
+        <div class="game-selection">
+            <button class="btn btn-outline-primary" onclick="selectGame('frlg')">
+                <img src="frlg.jpg" alt="FireRed/LeafGreen" class="img-fluid rounded mb-2">
+                Pokémon AteşKızılı YaprakYeşili
+            </button>
+            <button class="btn btn-outline-primary" onclick="selectGame('emerald')">
+                <img src="emerald.jpg" alt="Emerald" class="img-fluid rounded mb-2">
+                Pokémon Zümrüt
+            </button>
+            <button class="btn btn-outline-primary" onclick="selectGame('platinum')">
+                <img src="platinum.jpg" alt="Platinum" class="img-fluid rounded mb-2">
+                Pokémon Platin
+            </button>
+        </div>
+    </div>
+
+    <!-- Game Options -->
+    <div class="container mt-3">
+        <div id="optionsContainer" style="display:none;">
+            <h3 class="text-center">Oyun Özelleştirmeleri</h3>
+            <div id="options" class="options-container"></div>
+        </div>
+
+        <!-- Sub-Options Container -->
+        <div id="subOptionsContainer" class="sub-options-container" style="display:none;">
+            <div id="subOptions"></div>
+        </div>
+
+        <!-- Download Button Container -->
+        <div id="downloadContainer" style="display:none; margin-top: 20px;">
+            <!-- Download link is handled by the modal now -->
+        </div>
+    </div>
+
+    <!-- Bootstrap JS and Popper.js -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Custom Script -->
+    <script>
+        let selectedDownloadLink = '';
+
+        const gameOptions = {
+            frlg: [
+                {
+                    name: "AteşKızılı",
+                    description: "Bu versiyon, hikaye olarak YaprakYeşili ile tamamen aynıdır. Tek farkları, versiyona özel Pokémon'lardır. Bu versiyona özel Pokémon'lara internetten bakabilirsiniz.",
+                    subOptions: [
+                        {
+                            name: "A Versiyonu",
+                            description: "Eğer ilk defa Pokémon oynuyorsanız bu versiyonu tercih edebilirsiniz. A versiyonu, saldırılar ve yetenekler dahil %100 Türkçedir.",
+                            link: "download_link_frlg_firered_A"
+                        },
+                        {
+                            name: "B Versiyonu",
+                            description: "Daha önce İngilizce Pokémon oynadıysanız bu versiyonu tercih edebilirsiniz. Saldırı isimleri, yetenekler anlam karmaşası yaşanmaması ve alışıklık bozulmaması için B versiyonunda Türkçeye çevrilmemiştir.",
+                            link: "download_link_frlg_firered_B"
+                        }
+                    ]
+                },
+                {
+                    name: "YaprakYeşili",
+                    description: "Bu versiyon, hikaye olarak YaprakYeşili ile tamamen aynıdır. Tek farkları, versiyona özel Pokémon'lardır. Bu versiyona özel Pokémon'lara internetten bakabilirsiniz.",
+                    subOptions: [
+                        {
+                            name: "A Versiyonu",
+                            description: "Eğer ilk defa Pokémon oynuyorsanız bu versiyonu tercih edebilirsiniz. A versiyonu, saldırılar ve yetenekler dahil %100 Türkçedir.",
+                            link: "download_link_frlg_firered_A"
+                        },
+                        {
+                            name: "B Versiyonu",
+                            description: "Daha önce İngilizce Pokémon oynadıysanız bu versiyonu tercih edebilirsiniz. Saldırı isimleri, yetenekler anlam karmaşası yaşanmaması ve alışıklık bozulmaması için B versiyonunda Türkçeye çevrilmemiştir.",
+                            link: "download_link_frlg_firered_B"
+                        }
+                    ]
+                }
+            ],
+            emerald: [
+                {
+                    name: "A Versiyonu",
+                    description: "Eğer ilk defa Pokémon oynuyorsanız bu versiyonu tercih edebilirsiniz. A versiyonu, saldırılar ve yetenekler dahil %100 Türkçedir.",
+                    link: "download_link_frlg_firered_A"
+                },
+                {
+                    name: "B Versiyonu",
+                    description: "Daha önce İngilizce Pokémon oynadıysanız bu versiyonu tercih edebilirsiniz. Saldırı isimleri, yetenekler anlam karmaşası yaşanmaması ve alışıklık bozulmaması için B versiyonunda Türkçeye çevrilmemiştir.",
+                    link: "download_link_frlg_firered_B"
+                }
+            ],
+            platinum: [
+                {
+                    name: "Pokémon Platin",
+                    description: "Herhangi bir özelleştirme yok. Direkt olarak bu seçeneği seçip indirebilirsiniz.",
+                    link: "download_link_platinum"
+                }
+            ]
+        };
+
+        function selectGame(game) {
+            const optionsContainer = document.getElementById('optionsContainer');
+            const optionsDiv = document.getElementById('options');
+            const subOptionsContainer = document.getElementById('subOptionsContainer');
+            const subOptionsDiv = document.getElementById('subOptions');
+            const downloadContainer = document.getElementById('downloadContainer');
+
+            optionsContainer.style.display = 'block';
+            subOptionsContainer.style.display = 'none';
+            downloadContainer.style.display = 'none';
+            optionsDiv.innerHTML = ''; // Clear previous options
+            subOptionsDiv.innerHTML = ''; // Clear previous sub-options
+
+            gameOptions[game].forEach(option => {
+                if (option.subOptions) {
+                    // Main option for games like FireRed/LeafGreen
+                    const optionHtml = `
+                        <button class="btn btn-option" onclick="showSubOptions('${option.name}', '${game}')">
+                            <strong>${option.name}</strong>: ${option.description}
+                        </button>
+                    `;
+                    optionsDiv.innerHTML += optionHtml;
+                } else {
+                    // Direct download option for games like Platinum
+                    const optionHtml = `
+                        <button class="btn btn-option" onclick="prepareDownload('${option.link}')">
+                            <strong>${option.name}</strong>: ${option.description}
+                        </button>
+                    `;
+                    optionsDiv.innerHTML += optionHtml;
+                }
+            });
+        }
+
+        function showSubOptions(optionName, game) {
+            const subOptionsContainer = document.getElementById('subOptionsContainer');
+            const subOptionsDiv = document.getElementById('subOptions');
+            const downloadContainer = document.getElementById('downloadContainer');
+
+            subOptionsContainer.style.display = 'block';
+            subOptionsDiv.innerHTML = ''; // Clear previous sub-options
+            downloadContainer.style.display = 'none';
+
+            gameOptions[game].forEach(option => {
+                if (option.name === optionName) {
+                    option.subOptions.forEach(subOption => {
+                        const subOptionHtml = `
+                            <button class="btn btn-option" onclick="prepareDownload('${subOption.link}')">
+                                <strong>${subOption.name}</strong>: ${subOption.description}
+                            </button>
+                        `;
+                        subOptionsDiv.innerHTML += subOptionHtml;
+                    });
+                }
+            });
+        }
+
+        function prepareDownload(link) {
+            selectedDownloadLink = link;
+            const invitationModal = new bootstrap.Modal(document.getElementById('invitationModal'));
+            invitationModal.show();
+        }
+
+        function startDownload() {
+            if (selectedDownloadLink) {
+                window.location.href = selectedDownloadLink;
+            }
+        }
+    </script>
+</body>
+
+</html>
