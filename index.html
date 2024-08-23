@@ -38,17 +38,22 @@
             margin-bottom: 10px;
             display: block;
             text-align: left;
-            padding: 10px;
-            border: 1px solid #dee2e6;
+            padding: 15px; /* Increased padding */
+            font-size: 16px; /* Increased font size */
+            border: 2px solid #007bff; /* Blue border */
             border-radius: 5px;
-            background-color: #f8f9fa;
+            background-color: #f8f9fa; /* Light background color */
+            color: #333; /* Dark text color for contrast */
+            transition: background-color 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease; /* Smooth transition for hover effect */
         }
 
         /* Style for selected option */
-        .btn-option.active {
-            background-color: #007bff;
-            color: white;
-            border-color: #007bff;
+        .btn-option.active,
+        .btn-option:hover { /* Hover effect */
+            background-color: #e9ecef; /* Slightly darker background on hover */
+            color: #007bff; /* Blue text color on hover */
+            border-color: #0056b3; /* Darker blue border on hover */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Subtle shadow effect */
         }
 
         /* Responsive image sizes */
@@ -137,7 +142,7 @@
     <!-- Game Options -->
     <div class="container mt-3">
         <div id="optionsContainer" style="display:none;">
-            <h3 class="text-center">Oyun Özelleştirmeleri</h3>
+            <h3 class="text-center">İndirmek İçin Size Uygun Versiyonu Seçin</h3>
             <div id="options" class="options-container"></div>
         </div>
 
@@ -166,12 +171,12 @@
                     description: "Bu versiyon, hikaye olarak YaprakYeşili ile tamamen aynıdır. Tek farkları, versiyona özel Pokémon'lardır. Bu versiyona özel Pokémon'lara internetten bakabilirsiniz.",
                     subOptions: [
                         {
-                            name: "A Versiyonu",
+                            name: "AteşKırmızısı A Versiyonu",
                             description: "Eğer ilk defa Pokémon oynuyorsanız bu versiyonu tercih edebilirsiniz. A versiyonu, saldırılar ve yetenekler dahil %100 Türkçedir.",
                             link: "https://drive.google.com/file/d/1r-JJKkXo9xaUZnvzbtAxeCoVqi_oO2bG/view?usp=sharing"
                         },
                         {
-                            name: "B Versiyonu",
+                            name: "AteşKırmızısı B Versiyonu",
                             description: "Daha önce İngilizce Pokémon oynadıysanız bu versiyonu tercih edebilirsiniz. Saldırı isimleri, yetenekler anlam karmaşası yaşanmaması ve alışıklık bozulmaması için B versiyonunda Türkçeye çevrilmemiştir.",
                             link: "https://drive.google.com/file/d/1Gw4Qsqo02TatJLq3MDFX8eVX_zd5QpkT/view?usp=sharing"
                         }
@@ -182,12 +187,12 @@
                     description: "Bu versiyon, hikaye olarak YaprakYeşili ile tamamen aynıdır. Tek farkları, versiyona özel Pokémon'lardır. Bu versiyona özel Pokémon'lara internetten bakabilirsiniz.",
                     subOptions: [
                         {
-                            name: "A Versiyonu",
+                            name: "YaprakYeşili A Versiyonu",
                             description: "Eğer ilk defa Pokémon oynuyorsanız bu versiyonu tercih edebilirsiniz. A versiyonu, saldırılar ve yetenekler dahil %100 Türkçedir.",
                             link: "https://drive.google.com/file/d/1uupIA0SmFfQ8AwwIfFH7D9k3jjxpuOHq/view?usp=sharing"
                         },
                         {
-                            name: "B Versiyonu",
+                            name: "YaprakYeşili B Versiyonu",
                             description: "Daha önce İngilizce Pokémon oynadıysanız bu versiyonu tercih edebilirsiniz. Saldırı isimleri, yetenekler anlam karmaşası yaşanmaması ve alışıklık bozulmaması için B versiyonunda Türkçeye çevrilmemiştir.",
                             link: "https://drive.google.com/file/d/1TzXJFgW-tR-BEfdwQdZLOiC5QRy0Y7vl/view?usp=sharing"
                         }
